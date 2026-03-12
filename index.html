@@ -1,45 +1,507 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Visit Latin America — Cuba & Ecuador</title>
+    <meta
+      name="description"
+      content="Landing page for travel guides to Cuba and Ecuador — highlights, reasons to visit, and quick links."
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* THEME: edit here to update colors site-wide */
+      :root {
+        --blue: #1f628e; /* header & main accent */
+        --blue-dark: #0c6980;
+        --blue-light: rgba(31, 98, 142, 0.12);
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visit Ecuador & Cuba</title>
-    <link rel="stylesheet" href="index.css">
-</head>
+        --red: #c62828; /* hover / secondary accent */
+        --yellow: #fffeb8; /* button highlight */
 
-<body>
-    <header class="hero">
-        <h1>Why Visit Ecuador and Cuba?</h1>
-        <p>Two destinations full of culture, nature, and unforgettable experiences.</p>
+        --bg: #ffffff;
+        --text: #222222;
+        --muted: #6b6b6b;
+
+        --radius: 12px;
+        --content-max: 1200px;
+        --shadow-blue: 0 10px 30px rgba(31, 98, 142, 0.08);
+        --shadow-red: 0 10px 30px rgba(198, 40, 40, 0.06);
+      }
+
+      /* Reset & base */
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family:
+          Inter,
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          Arial;
+        color: var(--text);
+        background: var(--bg);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        line-height: 1.5;
+      }
+      a {
+        color: var(--blue);
+        text-decoration: none;
+      }
+      a:focus {
+        outline: 3px solid rgba(0, 0, 0, 0.08);
+        outline-offset: 3px;
+      }
+
+      .page-wide {
+        width: 100%;
+      }
+      .content {
+        max-width: var(--content-max);
+        margin: 0 auto;
+        padding: 14px;
+      }
+
+      .skip {
+        position: absolute;
+        left: -999px;
+      }
+      .skip:focus {
+        left: 0.75rem;
+        top: 0.75rem;
+        padding: 0.45rem 0.6rem;
+        background: #000;
+        color: #fff;
+        border-radius: 6px;
+        z-index: 1000;
+      }
+
+      /* Header (matches country pages) */
+      header.page-wide {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: var(--blue);
+        color: #fff;
+        box-shadow: var(--shadow-blue);
+      }
+      .nav {
+        display: flex;
+        justify-content: center;
+        gap: 18px;
+        padding: 14px 8px;
+      }
+      .nav a {
+        display: inline-block;
+        padding: 14px 26px;
+        border-radius: 12px;
+        font-family: Montserrat, sans-serif;
+        font-weight: 700;
+        color: #111;
+        background: var(--yellow);
+        transition: all 0.18s ease;
+        min-height: 48px;
+        line-height: 1;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      }
+      .nav a:hover,
+      .nav a:focus {
+        background: var(--red);
+        color: #fff;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+      }
+
+      /* HERO */
+      .hero.page-wide {
+        position: relative;
+        overflow: hidden;
+        background: #000;
+      }
+      .hero-media {
+        width: 100%;
+        height: 480px;
+        object-fit: cover;
+        display: block;
+        filter: brightness(0.45) saturate(0.95);
+      }
+      .hero .overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+      .hero .copy {
+        max-width: 980px;
+        text-align: center;
+        color: #fff;
+      }
+      .hero h1 {
+        font-family: Montserrat;
+        font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+        margin: 0 0 8px 0;
+        line-height: 1.05;
+        text-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+      }
+      .hero p.lead {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.95);
+        font-size: 1rem;
+        max-width: 70ch;
+        margin-left: auto;
+        margin-right: auto;
+        text-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+      }
+      .hero .cta {
+        margin-top: 14px;
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .btn {
+        display: inline-block;
+        padding: 10px 18px;
+        border-radius: 8px;
+        background: var(--yellow);
+        color: #111;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .hero-note {
+        margin: 16px auto 0;
+        max-width: 560px;
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.88);
+        opacity: 0.95;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            circle at 25% 20%,
+            rgba(255, 254, 184, 0.35),
+            transparent 55%
+          ),
+          radial-gradient(
+            circle at 75% 80%,
+            rgba(198, 40, 40, 0.25),
+            transparent 55%
+          );
+        pointer-events: none;
+        mix-blend-mode: screen;
+      }
+
+      @media (max-width: 640px) {
+        .hero-media {
+          height: 340px;
+        }
+        .hero h1 {
+          font-size: 1.4rem;
+        }
+        .hero p.lead {
+          font-size: 0.95rem;
+        }
+      }
+
+      /* Intro */
+      .intro {
+        padding: 28px 12px;
+        text-align: center;
+      }
+      .intro h2 {
+        font-family: Montserrat;
+        margin: 0 0 8px 0;
+      }
+      .intro p {
+        max-width: 72ch;
+        margin: 12px auto;
+        color: var(--muted);
+      }
+
+      /* Country summary cards */
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(360px, 460px));
+        justify-content: center;
+        gap: 24px;
+        padding: 24px 12px;
+      }
+      .country-card {
+        position: relative;
+        background: #fff;
+        border-radius: 12px;
+        padding: 14px;
+        box-shadow: var(--shadow-blue);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        transition:
+          transform 0.18s ease,
+          box-shadow 0.18s ease;
+      }
+      .country-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 72px;
+        height: 4px;
+        background: linear-gradient(90deg, var(--yellow), var(--red));
+        border-radius: 0 0 6px 0;
+      }
+      .country-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.1);
+      }
+      .country-img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+      .country-card h3 {
+        margin: 12px 0 6px 0;
+        font-family: Montserrat;
+      }
+      .country-card p {
+        margin: 0;
+        color: var(--muted);
+        flex: 1;
+      }
+      .country-card .actions {
+        margin-top: 12px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+      }
+      .link-btn {
+        padding: 10px 14px;
+        border-radius: 8px;
+        background: var(--blue);
+        color: #fff;
+        font-weight: 700;
+        text-decoration: none;
+        display: inline-block;
+        transition:
+          transform 0.18s ease,
+          box-shadow 0.18s ease,
+          background 0.18s ease;
+      }
+      .link-btn:hover,
+      .link-btn:focus {
+        background: var(--red);
+        box-shadow: 0 10px 18px rgba(0, 0, 0, 0.14);
+        transform: translateY(-2px);
+      }
+
+      /* Footer (same style) */
+      footer.page-wide {
+        background: #fafafa;
+        border-top: 1px solid #eee;
+        padding: 18px 0;
+      }
+      footer .content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+      }
+      footer small {
+        color: var(--muted);
+      }
+
+      /* responsive */
+      @media (max-width: 860px) {
+        .cards {
+          grid-template-columns: 1fr;
+        }
+        .nav {
+          gap: 12px;
+          padding: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <!-- Header (shared) -->
+    <header class="page-wide" role="banner">
+      <div class="nav">
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="cuba.html">Cuba</a>
+        <a href="ecuador.html">Ecuador</a>
+      </div>
     </header>
 
-    <main class="container">
-        <section class="card">
-            <h2>Ecuador</h2>
-            <ul>
-                <li><strong>Diverse nature:</strong> Andes mountains, Amazon rainforest, and the Galápagos Islands.</li>
-                <li><strong>Rich culture:</strong> Indigenous traditions, colorful markets, and colonial cities like
-                    Quito.</li>
-                <li><strong>Great food:</strong> Fresh ceviche, locro de papa, and tropical fruits.</li>
-            </ul>
-            <p><a class="page-link" href="../Ecuador/ecuador.html">Go to Ecuador page</a></p>
-        </section>
+    <!-- Hero -->
+    <section class="hero page-wide" aria-label="Hero">
+      <img
+        class="hero-media"
+        src="Ecuador/latinamerica.jpg"
+        alt="Sunset over coastal town and mountains"
+        loading="lazy"
+      />
+      <div class="overlay">
+        <div class="copy content" role="main" id="main">
+          <h1>Visit Latin America — Cuba & Ecuador</h1>
+          <p class="lead">
+            Two compact but endlessly rich destinations: vibrant music, colonial
+            heritage, and Caribbean beaches in Cuba — and staggering
+            biodiversity, Andean peaks, and the Galápagos in Ecuador. Explore
+            both for a culturally and naturally diverse trip.
+          </p>
+          <p class="hero-note">
+            Scroll down to explore each destination and discover what makes them
+            so unforgettable.
+          </p>
+        </div>
+      </div>
+    </section>
 
-        <section class="card">
-            <h2>Cuba</h2>
-            <ul>
-                <li><strong>Unique history:</strong> Classic cars, historic Havana, and vibrant architecture.</li>
-                <li><strong>Music and dance:</strong> Salsa rhythms and live music in every corner.</li>
-                <li><strong>Beautiful beaches:</strong> Crystal-clear waters and white sand in places like Varadero.
-                </li>
-            </ul>
-        </section>
-    </main>
+    <!-- short intro -->
+    <section class="intro page-wide" aria-labelledby="intro-head">
+      <div class="content">
+        <h2 id="intro-head">Why travel to Cuba & Ecuador?</h2>
+        <p>
+          Both countries offer a concentrated set of experiences: music,
+          history, and classic Caribbean shores in Cuba; mountain treks, Amazon
+          adventures, and the unique Galápagos in Ecuador. This site collects
+          practical planning info, highlights, and quick-start resources so you
+          can move from dreaming to planning.
+        </p>
+      </div>
+    </section>
 
-    <footer>
-        <p>Plan your next adventure in Ecuador and Cuba.</p>
+    <!-- Country summaries -->
+    <section class="cards page-wide" aria-label="Country summaries">
+      <article class="country-card content" aria-labelledby="cuba-title">
+        <img
+          class="country-img"
+          src="Cuba/cubaflag.jpg"
+          alt="Colorful street in Old Havana"
+          loading="lazy"
+        />
+        <h3 id="cuba-title">Cuba — music, history & beaches</h3>
+        <ul>
+          <li>
+            <strong>Unique history:</strong> Classic cars, historic Havana, and
+            vibrant architecture.
+          </li>
+          <li>
+            <strong>Music & dance:</strong> Salsa rhythms and live music in
+            every corner.
+          </li>
+          <li>
+            <strong>Beaches & relaxation:</strong> Crystal-clear waters and
+            white sand in places like Varadero.
+          </li>
+        </ul>
+        <p>
+          Cuba is a country of vivid history, captivating landscapes, and deeply
+          rooted cultural traditions. From Havana’s colonial streets to the
+          beaches of Varadero, the island offers a uniquely musical and
+          laid-back Caribbean experience.
+        </p>
+        <p>
+          Explore essentials: attractions, planning tips, food guides, and
+          accessibility notes on the Cuba page.
+        </p>
+        <div class="actions">
+          <a class="link-btn" href="cuba.html">Explore Cuba</a>
+        </div>
+      </article>
+
+      <article class="country-card content" aria-labelledby="ecuador-title">
+        <img
+          class="country-img"
+          src="Ecuador/ecuadorflag.jpg"
+          alt="Andean mountains and colorful market in Ecuador"
+          loading="lazy"
+        />
+        <h3 id="ecuador-title">Ecuador — Andes, Amazon & Galápagos</h3>
+        <ul>
+          <li>
+            <strong>Diverse nature:</strong> Andes mountains, Amazon rainforest,
+            and the Galápagos Islands.
+          </li>
+          <li>
+            <strong>Rich culture:</strong> Indigenous traditions, colorful
+            markets, and colonial cities like Quito.
+          </li>
+          <li>
+            <strong>Great food:</strong> Fresh ceviche, locro de papa, and
+            tropical fruits.
+          </li>
+        </ul>
+        <p>
+          Ecuador is one of the most biodiverse countries on Earth, where
+          towering Andean peaks meet lush Amazon rainforest and the
+          extraordinary wildlife of the Galápagos. Its compact size makes it
+          easy to experience a lot in a short trip.
+        </p>
+        <p>
+          Explore essentials: parks, planning tips, food guides, and
+          accessibility notes on the Ecuador page.
+        </p>
+        <div class="actions">
+          <a class="link-btn" href="ecuador.html">Explore Ecuador</a>
+        </div>
+      </article>
+    </section>
+
+    <!-- Footer (shared) -->
+    <footer class="page-wide" role="contentinfo">
+      <div class="content">
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+          "
+        >
+          <div>
+            <strong style="font-family: Montserrat"
+              >Cuba & Ecuador Travel Guides</strong
+            >
+          </div>
+          <div style="color: var(--muted); text-align: center">
+            Sources: country tourism boards and travel guides.
+          </div>
+        </div>
+
+        <div
+          style="
+            margin-top: 12px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.92rem;
+          "
+        >
+          © 2026 — Prepared by Johan Cajas &amp; Wilhelm Gonce
+        </div>
+      </div>
     </footer>
-</body>
-
+  </body>
 </html>

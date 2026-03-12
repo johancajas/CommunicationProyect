@@ -1,0 +1,962 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Visit Ecuador — Plan Your Trip</title>
+    <meta
+      name="description"
+      content="Ecuador travel guide — highlights, planning tips, food guide, accessibility and map."
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ========== THEME (change these in one place) ========== */
+      :root {
+        /* primary named colors you asked for */
+        --blue: #1f628e; /* header & main accent */
+        --blue-dark: #0c6980;
+        --blue-light: rgba(31, 98, 142, 0.12);
+
+        --red: #c62828; /* secondary accent */
+        --yellow: #fffeb8; /* country-specific accent */
+
+        /* neutral */
+        --bg: #ffffff;
+        --text: #222222;
+        --muted: #6b6b6b;
+
+        /* layout */
+        --radius: 10px;
+        --gap: 16px;
+        --content-max: 1200px;
+
+        /* shadows (use tints of the theme colors) */
+        --shadow-blue: 0 10px 30px rgba(31, 98, 142, 0.08);
+        --shadow-red: 0 10px 30px rgba(198, 40, 40, 0.06);
+        --shadow-yellow: 0 8px 22px rgba(255, 254, 184, 0.3);
+      }
+
+      /* ========== Reset & base ========== */
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family:
+          Inter,
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          Arial;
+        color: var(--text);
+        background: var(--bg);
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+      }
+      a {
+        color: var(--blue);
+        text-decoration: none;
+      }
+      a:focus {
+        outline: 3px solid rgba(0, 0, 0, 0.08);
+        outline-offset: 3px;
+      }
+
+      .page-wide {
+        width: 100%;
+      }
+      .content {
+        max-width: var(--content-max);
+        margin: 0 auto;
+        padding: 12px;
+      }
+
+      .skip {
+        position: absolute;
+        left: -999px;
+      }
+      .skip:focus {
+        left: 0.75rem;
+        top: 0.75rem;
+        padding: 0.45rem 0.6rem;
+        background: #000;
+        color: #fff;
+        border-radius: 6px;
+        z-index: 1000;
+      }
+
+      /* ========== Header (single blue color) ========== */
+      header.page-wide {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: var(--blue);
+        color: #fff;
+        box-shadow: var(--shadow-blue);
+      }
+      .nav {
+        display: flex;
+        justify-content: center;
+        gap: 22px;
+        padding: 16px 10px;
+      }
+      /* nav button style (use root colors) */
+      .nav a {
+        display: inline-block;
+        padding: 18px 30px;
+        border-radius: 12px;
+        font-size: 0.95rem;
+        font-family: Montserrat, sans-serif;
+        font-weight: 700;
+        color: #111;
+        background: var(--yellow);
+        transition: all 0.18s ease;
+        min-height: 52px;
+        line-height: 1;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      }
+      /* hover effect: switch to red accent */
+      .nav a:hover,
+      .nav a:focus {
+        background: var(--red);
+        color: #fff;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+        text-decoration: none;
+      }
+
+      /* HERO: full-bleed image with overlay text centered */
+      .hero.page-wide {
+        position: relative;
+        overflow: hidden;
+        background: #000;
+      }
+      .hero .hero-media {
+        width: 100%;
+        height: 520px;
+        display: block;
+        object-fit: cover;
+        filter: brightness(0.45) saturate(0.95);
+        opacity: 1;
+        transform-origin: center;
+      }
+      .hero .overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        pointer-events: none;
+      }
+      .hero .overlay .copy {
+        max-width: 980px;
+        text-align: center;
+        color: #fff;
+        pointer-events: auto;
+      }
+      .hero h1 {
+        font-family: Montserrat, sans-serif;
+        font-size: clamp(1.8rem, 3.6vw, 3rem);
+        margin: 0 0 6px 0;
+        line-height: 1.05;
+        text-shadow: 0 6px 18px rgba(0, 0, 0, 0.55);
+      }
+      .hero p.lead {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.92);
+        font-size: 1.05rem;
+        max-width: 80ch;
+        margin-left: auto;
+        margin-right: auto;
+        text-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+      }
+      .hero .cta-row {
+        margin-top: 14px;
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .btn {
+        display: inline-block;
+        padding: 10px 18px;
+        border-radius: 8px;
+        background: var(--yellow);
+        color: #111;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      @media (max-width: 640px) {
+        .hero .hero-media {
+          height: 380px;
+        }
+        .hero h1 {
+          font-size: 1.6rem;
+        }
+        .hero p.lead {
+          font-size: 0.95rem;
+        }
+      }
+
+      /* REASONS (top) */
+      .reasons {
+        padding: 28px 12px;
+        background: transparent;
+      }
+      .reasons .content {
+        padding: 0;
+      }
+      .reasons h2 {
+        font-family: Montserrat;
+        margin-top: 0;
+      }
+      .reason-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 18px;
+        margin-top: 10px;
+      }
+      .reason {
+        background: #fff;
+        border-radius: 8px;
+        padding: 18px;
+        box-shadow: var(--shadow-red);
+        border-left: 6px solid var(--yellow);
+      }
+      .reason h3 {
+        margin: 0 0 6px 0;
+        font-family: Montserrat;
+      }
+      .reason p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      /* QUICK FACTS (horizontal scrolling cards) */
+      .quick-facts {
+        padding: 24px 12px;
+      }
+      .quick-facts h2 {
+        font-family: Montserrat;
+        margin: 0 0 12px 0;
+        text-align: center;
+      }
+      .facts {
+        display: flex;
+        gap: 14px;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+      }
+      .facts::-webkit-scrollbar {
+        height: 10px;
+      }
+      .facts::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.15);
+        border-radius: 999px;
+      }
+      .fact-card {
+        flex: 0 0 240px;
+        background: linear-gradient(180deg, var(--blue-light), #ffffff);
+        border-radius: 10px;
+        padding: 16px 14px;
+        text-align: center;
+        box-shadow: 0 6px 18px rgba(21, 101, 192, 0.1);
+        transition: transform 0.18s ease;
+        scroll-snap-align: start;
+      }
+      .fact-card h3 {
+        margin: 0;
+        font-size: 1rem;
+        font-family: Montserrat;
+      }
+      .fact-card p {
+        margin: 8px 0 0 0;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+      .fact-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 14px 30px rgba(21, 101, 192, 0.12);
+      }
+
+      /* ATTRACTIONS (inline cards with scrollbar) */
+      .attractions-section {
+        position: relative;
+        padding: 32px 12px;
+        overflow: hidden;
+      }
+      .attractions-section::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("Ecuador/ecuador-seasons.jpg");
+        background-size: cover;
+        background-position: center;
+        opacity: 0.07;
+        pointer-events: none;
+      }
+      .attractions {
+        position: relative;
+      }
+      .attractions h2 {
+        font-family: Montserrat;
+        margin-top: 0;
+      }
+      .attractions .cards {
+        display: flex;
+        gap: 18px;
+        margin-top: 14px;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+      }
+      .attractions .cards::-webkit-scrollbar {
+        height: 10px;
+      }
+      .attractions .cards::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.15);
+        border-radius: 999px;
+      }
+      .attr-card {
+        flex: 0 0 310px;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: var(--shadow-blue);
+        display: flex;
+        flex-direction: column;
+        scroll-snap-align: start;
+      }
+      .attr-card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        display: block;
+      }
+      .attr-card .body {
+        padding: 14px;
+        flex: 1;
+      }
+      .attr-card h3 {
+        margin: 0 0 6px 0;
+        font-family: Montserrat;
+      }
+      .attr-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.45;
+      }
+
+      /* BOTTOM GRID: Planning | Map + Related */
+      .bottom-grid {
+        display: grid;
+        grid-template-columns: 1fr 420px;
+        gap: 22px;
+        align-items: start;
+        padding: 28px 12px;
+      }
+      .planning-card {
+        background: linear-gradient(180deg, #fff, var(--blue-light));
+        border-radius: 10px;
+        padding: 16px;
+        box-shadow: var(--shadow-red);
+      }
+      .planning-card h3 {
+        margin-top: 0;
+        font-family: Montserrat;
+      }
+      .planning-card ul {
+        margin: 8px 0 0 18px;
+        color: var(--muted);
+      }
+      .side-column {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .map-card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 0;
+        box-shadow: var(--shadow-blue);
+        overflow: hidden;
+      }
+      .map-card iframe {
+        width: 100%;
+        height: 300px;
+        border: 0;
+        display: block;
+      }
+      .related-card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 12px;
+        box-shadow: var(--shadow-red);
+      }
+      .related-list a {
+        display: block;
+        margin-bottom: 10px;
+      }
+      .related-list a:last-child {
+        margin-bottom: 0;
+      }
+
+      /* FOOD GUIDE (full-width, header color as background) */
+      .food-guide {
+        background: var(--blue);
+        color: #fff;
+        padding: 26px 12px;
+      }
+      .food-guide .content {
+        padding: 0;
+        max-width: var(--content-max);
+        margin: 0 auto;
+      }
+      .food-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 18px;
+        margin-top: 12px;
+      }
+      .food-card {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.06),
+          rgba(255, 255, 255, 0.02)
+        );
+        border-radius: 10px;
+        overflow: hidden;
+        color: #fff;
+        box-shadow: var(--shadow-yellow);
+      }
+      .food-card img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+      }
+      .food-card .body {
+        padding: 12px;
+      }
+      .food-card h3 {
+        margin: 0 0 6px 0;
+        font-family: Montserrat;
+        color: #fff;
+      }
+      .food-card p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.92);
+      }
+
+      /* ACCESSIBILITY (full-width colored background) */
+      .accessibility {
+        background: var(--blue-light);
+        color: var(--text);
+        padding: 26px 12px;
+      }
+      .accessibility .content {
+        max-width: var(--content-max);
+        margin: 0 auto;
+        padding: 0;
+      }
+      .accessibility h2 {
+        font-family: Montserrat;
+        margin-top: 0;
+      }
+      .accessibility p {
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      footer {
+        padding: 18px 12px;
+        text-align: center;
+        color: var(--muted);
+      }
+      footer a {
+        color: var(--blue);
+      }
+
+      /* Responsive */
+      @media (max-width: 1100px) {
+        .bottom-grid {
+          grid-template-columns: 1fr 360px;
+        }
+      }
+      @media (max-width: 860px) {
+        .bottom-grid {
+          grid-template-columns: 1fr;
+        }
+        .side-column {
+          order: 2;
+        }
+      }
+      @media (max-width: 520px) {
+        .hero .hero-media {
+          height: 320px;
+        }
+        .hero h1 {
+          font-size: 1.6rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <!-- HEADER -->
+    <header class="page-wide" role="banner">
+      <div class="nav">
+        <a href="index.html">Home</a>
+        <a href="cuba.html">Cuba</a>
+        <a href="ecuador.html" aria-current="page">Ecuador</a>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero page-wide" aria-label="Hero">
+      <img
+        class="hero-media"
+        src="Ecuador/ecuador-main.jpg"
+        alt="Ecuador landscapes"
+        loading="lazy"
+      />
+      <div class="overlay">
+        <div class="content copy" role="region" aria-label="Hero text">
+          <h1>Discover Ecuador</h1>
+          <p class="lead">
+            Ecuador is a country of rich history, breathtaking landscapes, and
+            vibrant cultural traditions. Located in the heart of South America,
+            it is one of the most biodiverse nations on the planet, sitting
+            between Colombia to the north and Peru to the south. Known as the
+            "Middle of the World," its diverse character includes the vast
+            Amazon rainforest, the towering peaks of the Andes mountains,
+            charming colonial cities, and the extraordinary wildlife of the
+            Galápagos Islands, making it one of the most fascinating and
+            unforgettable destinations in Latin America.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <main id="main">
+      <!-- REASONS (moved above quick facts) -->
+      <section
+        id="reasons"
+        class="reasons page-wide"
+        aria-labelledby="reasons-head"
+      >
+        <div class="content">
+          <h2 id="reasons-head">Top Reasons to Visit</h2>
+          <div class="reason-grid">
+            <article class="reason" aria-labelledby="r1">
+              <h3 id="r1">Diverse landscapes</h3>
+              <p>
+                Andes highlands, Amazon rainforest, Pacific coast, and the
+                unique wildlife and ecosystems offer enormous variety in one
+                relatively small country — from volcano treks to island wildlife
+                encounters.
+              </p>
+            </article>
+
+            <article class="reason" aria-labelledby="r2">
+              <h3 id="r2">Cultural heritage</h3>
+              <p>
+                Historic sites, indigenous markets, and lively local traditions
+                provide authentic cultural experiences and opportunities to
+                engage with local communities and craftspeople.
+              </p>
+            </article>
+
+            <article class="reason" aria-labelledby="r3">
+              <h3 id="r3">Delicious food</h3>
+              <p>
+                From seafood ceviche on the coast to hearty Andean dishes and
+                street snacks, Ecuador’s regional foods (and fresh tropical
+                fruits) are a highlight for food-loving travelers.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- QUICK FACTS -->
+      <section class="quick-facts page-wide" aria-labelledby="facts-head">
+        <div class="content">
+          <h2 id="facts-head">Quick Facts</h2>
+          <div class="facts" role="list" aria-label="Quick facts">
+            <div class="fact-card" role="listitem">
+              <h3>Currency</h3>
+              <p>U.S. dollar (USD)</p>
+            </div>
+            <div class="fact-card" role="listitem">
+              <h3>Language</h3>
+              <p>Spanish &amp; indigenous languages</p>
+            </div>
+            <div class="fact-card" role="listitem">
+              <h3>Best months</h3>
+              <p>June–September (Andes drier)</p>
+            </div>
+            <div class="fact-card" role="listitem">
+              <h3>Capital</h3>
+              <p>Quito</p>
+            </div>
+            <div class="fact-card" role="listitem">
+              <h3>Founded</h3>
+              <p>1534 (Quito Spanish founding)</p>
+            </div>
+            <div class="fact-card" role="listitem">
+              <h3>Population</h3>
+              <p>~17 million (estimate)</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SUGGESTED PLACES / ATTRACTIONS -->
+      <section
+        id="places"
+        class="attractions-section page-wide"
+        aria-labelledby="places-head"
+      >
+        <div class="content attractions">
+          <h2 id="places-head">Suggested Places</h2>
+
+          <div class="cards" role="list">
+            <article class="attr-card" role="listitem" tabindex="0">
+              <img
+                src="Ecuador/quito.jpg"
+                alt="Quito colonial architecture and mountain views"
+                loading="lazy"
+              />
+              <div class="body">
+                <h3>Quito</h3>
+                <p>
+                  Colonial architecture and mountain views — the historic center
+                  of Quito is one of the best-preserved in the Americas with
+                  plazas, churches, and elevated viewpoints. Use Quito as a base
+                  to explore nearby volcanic landscapes and cultural sites.
+                </p>
+              </div>
+            </article>
+
+            <article class="attr-card" role="listitem" tabindex="0">
+              <img
+                src="Ecuador/banos.jpg"
+                alt="Baños waterfalls and adventure activities"
+                loading="lazy"
+              />
+              <div class="body">
+                <h3>Baños</h3>
+                <p>
+                  Adventure sports and waterfalls — a hub for outdoor activities
+                  like rafting, canyoning, and hiking to waterfalls. Baños is
+                  compact and lively, with thermal baths and many tour operators
+                  offering daily excursions.
+                </p>
+              </div>
+            </article>
+
+            <article class="attr-card" role="listitem" tabindex="0">
+              <img
+                src="Ecuador/galapagos.jpg"
+                alt="Galápagos wildlife and volcanic landscapes"
+                loading="lazy"
+              />
+              <div class="body">
+                <h3>Galápagos</h3>
+                <p>
+                  Unique wildlife and volcanic islands — a once-in-a-lifetime
+                  wildlife experience with endemic species, snorkel
+                  opportunities, and guided island tours. Plan in advance for
+                  permits, cruises, or island-hopping itineraries.
+                </p>
+              </div>
+            </article>
+
+            <article class="attr-card" role="listitem" tabindex="0">
+              <img
+                src="Ecuador/amazon.jpg"
+                alt="Amazon rainforest canopy"
+                loading="lazy"
+              />
+              <div class="body">
+                <h3>Amazon rainforest</h3>
+                <p>
+                  Explore lush waterways and jungle wildlife in Ecuador’s Amazon
+                  basin — guided lodges offer safe wildlife spotting, canoe
+                  trips, and cultural visits with indigenous communities.
+                </p>
+              </div>
+            </article>
+
+            <article class="attr-card" role="listitem" tabindex="0">
+              <img
+                src="Ecuador/cotopaxi-flag.jpg"
+                alt="Cotopaxi National Park landscape"
+                loading="lazy"
+              />
+              <div class="body">
+                <h3>Cotopaxi National Park</h3>
+                <p>
+                  Hike around one of the world's highest active volcanoes, with
+                  glacier views and highland páramo landscapes — great for day
+                  trips from Quito or as part of a multi-day trek.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- PLANNING + MAP + RELATED (side-by-side) -->
+      <section class="bottom-grid page-wide" aria-labelledby="plan-head">
+        <div class="content planning">
+          <div
+            class="planning-card"
+            role="region"
+            aria-labelledby="plan-head-inner"
+          >
+            <h3 id="plan-head-inner">Planning: transport, money & timing</h3>
+
+            <h4>Transport</h4>
+            <ul>
+              <li>
+                Intercity buses are affordable and frequent; domestic flights
+                save time for Galápagos and distant regions.
+              </li>
+              <li>
+                Within cities use taxis or ride apps where available; in smaller
+                towns, arrange transfers via hotels.
+              </li>
+            </ul>
+
+            <h4>Money &amp; costs</h4>
+            <ul>
+              <li>
+                Ecuador uses the U.S. dollar—carry small bills in rural areas
+                and be aware of card acceptance limits.
+              </li>
+              <li>
+                Typical costs vary by region; markets and street food are
+                budget-friendly, tours and Galápagos trips cost more.
+              </li>
+            </ul>
+
+            <h4>When to visit</h4>
+            <p>
+              Choose timing by region: Andes drier June–September; coast warmer
+              Dec–May; Amazon is rainy year-round but accessible.
+            </p>
+
+            <h4>Practical tips</h4>
+            <ul>
+              <li>
+                Try local dishes like ceviche, encebollado, hornado,
+                llapingachos, humita, and bolón.
+              </li>
+              <li>
+                Altitude note: take it easy on the first day in Quito or the
+                highlands.
+              </li>
+              <li>
+                Carry a refillable water bottle and stay hydrated, especially in
+                high-altitude areas.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <aside class="page-wide">
+          <div class="content side-column">
+            <div class="map-card" role="region" aria-labelledby="map-title">
+              <h4 id="map-title">Interactive map</h4>
+              <iframe
+                title="Map of Ecuador"
+                src="https://www.google.com/maps?q=Ecuador&output=embed"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+              <div
+                style="
+                  padding: 10px 12px;
+                  color: var(--muted);
+                  font-size: 0.95rem;
+                "
+              >
+                Map with suggested pins — click markers for details.
+              </div>
+            </div>
+
+            <div
+              class="related-card"
+              role="region"
+              aria-labelledby="related-title"
+            >
+              <h4 id="related-title">Related resources</h4>
+              <div class="related-list">
+                <a
+                  href="https://ecuador.travel/en/"
+                  rel="noopener"
+                  target="_blank"
+                >
+                  Ecuador tourism official site
+                </a>
+                <a
+                  href="https://www.tripadvisor.com/Attractions-g294307-Activities-Ecuador.html"
+                  rel="noopener"
+                  target="_blank"
+                >
+                  TripAdvisor Ecuador attractions
+                </a>
+                <a
+                  href="https://www.nomadicmatt.com/travel-guides/ecuador-travel-tips/"
+                  rel="noopener"
+                  target="_blank"
+                >
+                  Nomadic Matt Ecuador travel tips
+                </a>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- FOOD GUIDE (full-width using header color) -->
+      <section class="food-guide page-wide" aria-labelledby="food-head">
+        <div class="content">
+          <h2
+            id="food-head"
+            style="color: #fff; margin-top: 0; font-family: Montserrat"
+          >
+            Food and Travel Tips
+          </h2>
+
+          <div class="food-grid" role="list">
+            <article class="food-card" role="listitem" tabindex="0">
+              <img
+                src="Ecuador/ceviche.jpg"
+                alt="Ecuador food examples: ceviche and encebollado"
+                loading="lazy"
+              />
+              <div class="body">
+                <h3>Ceviche & encebollado</h3>
+                <p>
+                  Ceviche on the coast is fresh and citrusy; encebollado (fish
+                  soup) is a hearty breakfast favorite in coastal towns. Try it
+                  with plantain chips and plenty of lime.
+                </p>
+              </div>
+            </article>
+
+            <article class="food-card" role="listitem" tabindex="0">
+              <img
+                src="Ecuador/llapingacho.jpg"
+                alt="Hornado roast pork dish"
+                loading="lazy"
+              />
+              <div class="body">
+                <h3>Hornado & llapingachos</h3>
+                <p>
+                  In the highlands, seek hornado (roast pork) served with
+                  llapingachos (cheesy potato patties). These are often
+                  accompanied by curtido (pickled onions) and spicy aji sauce.
+                </p>
+              </div>
+            </article>
+
+            <article class="food-card" role="listitem" tabindex="0">
+              <img
+                src="Ecuador/humita.jpg"
+                alt="Humita and bolón street food"
+                loading="lazy"
+              />
+              <div class="body">
+                <h3>Humita & bolón</h3>
+                <p>
+                  Humita is a steamed corn cake; bolón is a fried plantain ball
+                  often filled with cheese or pork. Both are popular street food
+                  breakfasts across Ecuador.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACCESSIBILITY & SUITABILITY (full-width, colored background) -->
+      <section class="accessibility page-wide" aria-labelledby="access-head">
+        <div class="content">
+          <h2 id="access-head">Accessibility & suitability</h2>
+          <p>
+            Ecuador can work well for a broad range of travelers. Families will
+            find beach and nature activities suitable for children, while
+            cultural travelers and couples will enjoy historic centers and
+            cultural markets. Adventure and outdoor travelers will love trekking
+            in the Andes, river trips in the Amazon, and wildlife on the
+            Galápagos.
+          </p>
+          <p style="margin-top: 10px; color: var(--muted)">
+            Infrastructure varies — major cities like Quito and Guayaquil have
+            good medical facilities, taxis, and hotels with accessibility
+            features; however, rural areas and some historic centers have uneven
+            sidewalks, steps, and limited ramp access. If you or someone in your
+            party has mobility requirements, contact hotels and tour operators
+            in advance to confirm accessible rooms, vehicle options, and
+            assistance. For travelers sensitive to altitude, plan slow
+            acclimatization in highland destinations, avoid strenuous activity
+            on arrival, and carry any necessary medications. For families and
+            solo travelers, standard safety precautions apply: keep copies of
+            travel documents, use reputable transport, and ask local hosts for
+            current advice on neighborhoods and weather-related travel
+            conditions.
+          </p>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="page-wide" role="contentinfo">
+        <div class="content">
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 8px;
+            "
+          >
+            <div>
+              <strong style="font-family: Montserrat">Ecuador Guide</strong>
+            </div>
+            <div style="color: var(--muted); text-align: center">
+              Sources: Ecuador tourism resources and travel guides.
+            </div>
+          </div>
+
+          <div
+            style="
+              margin-top: 12px;
+              text-align: center;
+              color: var(--muted);
+              font-size: 0.92rem;
+            "
+          >
+            © 2026 — Prepared by Johan Cajas &amp; Wilhelm Gonce
+          </div>
+        </div>
+      </footer>
+    </main>
+  </body>
+</html>

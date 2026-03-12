@@ -1,0 +1,992 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Cuba — Plan Your Trip</title>
+    <meta
+      name="description"
+      content="Cuba travel guide — attractions, planning tips, food guide, accessibility and an interactive map."
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ========== THEME (change these in one place) ========== */
+      :root {
+        /* primary named colors you asked for */
+        --blue: #1f628e; /* header & main accent */
+        --blue-dark: #0c6980;
+        --blue-light: rgba(31, 98, 142, 0.12);
+
+        --red: #c62828; /* secondary accent */
+        --yellow: #fffeb8; /* country-specific accent */
+
+        /* neutral */
+        --bg: #ffffff;
+        --text: #222222;
+        --muted: #6b6b6b;
+
+        /* layout */
+        --radius: 10px;
+        --gap: 16px;
+        --content-max: 1200px;
+
+        /* shadows (use tints of the theme colors) */
+        --shadow-blue: 0 10px 30px rgba(31, 98, 142, 0.08);
+        --shadow-red: 0 10px 30px rgba(198, 40, 40, 0.06);
+        --shadow-yellow: 0 8px 22px rgba(255, 254, 184, 0.3);
+      }
+
+      /* ========== Reset & base ========== */
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family:
+          Inter,
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          "Helvetica Neue",
+          Arial;
+        color: var(--text);
+        background: var(--bg);
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      a {
+        color: var(--blue);
+        text-decoration: none;
+      }
+      a:focus {
+        outline: 3px solid rgba(0, 0, 0, 0.08);
+        outline-offset: 3px;
+      }
+
+      /* full-bleed layout: page elements use full width; content inner has max width for readability */
+      .page-wide {
+        width: 100%;
+      }
+      .content {
+        max-width: var(--content-max);
+        margin: 0 auto;
+        padding: 12px;
+      } /* edit padding here for side margins */
+
+      /* Skip link */
+      .skip {
+        position: absolute;
+        left: -999px;
+      }
+      .skip:focus {
+        left: 0.75rem;
+        top: 0.75rem;
+        padding: 0.45rem 0.6rem;
+        background: #000;
+        color: #fff;
+        border-radius: 6px;
+        z-index: 1000;
+      }
+
+      /* ========== Header (single blue color) ========== */
+      header.page-wide {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: var(--blue);
+        color: #fff;
+        box-shadow: var(--shadow-blue);
+      }
+      .nav {
+        display: flex;
+        justify-content: center;
+        gap: 22px;
+        padding: 16px 10px;
+      }
+      /* nav button style (use root colors) */
+      .nav a {
+        display: inline-block;
+        padding: 18px 30px;
+        border-radius: 12px;
+        font-size: 0.95rem;
+        font-family: Montserrat, sans-serif;
+        font-weight: 700;
+        color: #111;
+        background: var(--yellow);
+        transition: all 0.18s ease;
+        min-height: 52px;
+        line-height: 1;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      }
+      /* hover effect: switch to red accent */
+      .nav a:hover,
+      .nav a:focus {
+        background: var(--red);
+        color: #fff;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+        text-decoration: none;
+      }
+
+      /* ========== HERO (image with centered overlay text) ========== */
+      .hero.page-wide {
+        position: relative;
+        overflow: hidden;
+        background: #000;
+      }
+      .hero .hero-media {
+        width: 100%;
+        height: 520px; /* tall hero */
+        display: block;
+        object-fit: cover;
+        filter: brightness(0.5) saturate(0.95); /* dim / more opaque feel */
+        opacity: 1;
+        transform-origin: center;
+      }
+      /* overlay text centered */
+      .hero .overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        pointer-events: none; /* allow clicks to pass to controls if needed */
+      }
+      .hero .overlay .copy {
+        max-width: 980px;
+        text-align: center;
+        color: #fff;
+        pointer-events: auto;
+      }
+      .hero h1 {
+        font-family: Montserrat, sans-serif;
+        font-size: clamp(1.8rem, 3.6vw, 3rem);
+        margin: 0 0 6px 0;
+        line-height: 1.05;
+        text-shadow: 0 6px 18px rgba(0, 0, 0, 0.55);
+      }
+      .hero p.lead {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.92);
+        font-size: 1.05rem;
+        max-width: 80ch;
+        margin-left: auto;
+        margin-right: auto;
+        text-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+      }
+      .hero .cta-row {
+        margin-top: 14px;
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .btn {
+        display: inline-block;
+        padding: 10px 18px;
+        border-radius: 8px;
+        background: var(--yellow);
+        color: #111;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      /* small responsive hero height */
+      @media (max-width: 640px) {
+        .hero .hero-media {
+          height: 380px;
+        }
+        .hero h1 {
+          font-size: 1.6rem;
+        }
+        .hero p.lead {
+          font-size: 0.95rem;
+        }
+      }
+
+      /* ========== REASONS (moved above quick facts) ========== */
+      .reasons {
+        padding: 28px 12px;
+        background: transparent;
+      }
+      .reasons .content {
+        padding: 0;
+      }
+      .reasons h2 {
+        font-family: Montserrat;
+        margin-top: 0;
+      }
+      .reason-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 18px;
+        margin-top: 10px;
+      }
+      .reason {
+        background: #fff;
+        border-radius: 8px;
+        padding: 18px;
+        box-shadow: var(--shadow-red);
+        border-left: 6px solid var(--yellow);
+      }
+      .reason h3 {
+        margin: 0 0 6px 0;
+        font-family: Montserrat;
+      }
+      .reason p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      /* ========== QUICK FACTS (larger centered cards, smaller padding; modified fields) ========== */
+      .quick-facts {
+        padding: 20px 12px;
+        background: var(--blue-light);
+      }
+      .quick-facts h2 {
+        font-family: Montserrat;
+        margin: 0 0 12px 0;
+        text-align: center;
+      }
+      .facts-grid {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 14px;
+        overflow-x: auto;
+        padding-bottom: 6px;
+        max-width: 920px;
+        margin: 0 auto;
+      }
+      .facts-grid::-webkit-scrollbar {
+        height: 8px;
+      }
+      .facts-grid::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 999px;
+      }
+      .fact-card {
+        min-width: 220px;
+      }
+      .fact-card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 14px 14px;
+        text-align: center;
+        box-shadow: var(--shadow-blue);
+        transition:
+          transform 0.18s ease,
+          box-shadow 0.18s ease;
+        min-height: 78px;
+      }
+      .fact-card h3 {
+        margin: 0;
+        font-size: 1rem;
+        font-family: Montserrat;
+      }
+      .fact-card p {
+        margin: 6px 0 0 0;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+      .fact-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 14px 30px rgba(31, 98, 142, 0.18);
+      }
+
+      /* ========== ATTRACTIONS (section background image very translucent) ========== */
+      .attractions-section {
+        position: relative;
+        padding: 32px 12px;
+        overflow: hidden;
+      }
+      .attractions-section::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("background.jpg");
+        background-size: cover;
+        background-position: center;
+        opacity: 0.2; /* very translucent */
+        pointer-events: none;
+      }
+      .attractions {
+        position: relative;
+      } /* place content above background */
+      .attractions h2 {
+        font-family: Montserrat;
+        margin-top: 0;
+      }
+      .attractions-grid {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 18px;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        margin-top: 14px;
+      }
+      .attractions-grid::-webkit-scrollbar {
+        height: 10px;
+      }
+      .attractions-grid::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 999px;
+      }
+      .attr-card {
+        min-width: 300px;
+      }
+      .attr-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: var(--shadow-blue);
+        display: flex;
+        flex-direction: column;
+      }
+      .attr-card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        display: block;
+      }
+      .attr-card .body {
+        padding: 14px;
+        flex: 1;
+      }
+      .attr-card h3 {
+        margin: 0 0 6px 0;
+        font-family: Montserrat;
+      }
+      .attr-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.45;
+      } /* extended text area */
+
+      /* ========== BOTTOM GRID: Planning | Map + Related (side by side) ========== */
+      .bottom-grid {
+        display: grid;
+        grid-template-columns: 1fr 420px;
+        gap: 22px;
+        align-items: center;
+        padding: 28px 12px;
+      }
+      .planning-card {
+        background: var(--blue-light);
+        border-radius: 10px;
+        padding: 18px;
+        box-shadow: var(--shadow-red);
+      }
+      .planning-card h3 {
+        margin-top: 0;
+        font-family: Montserrat;
+      }
+      .planning-card ul {
+        margin: 8px 0 0 18px;
+        color: var(--muted);
+      }
+
+      .side-column {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .map-card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 0;
+        box-shadow: var(--shadow-blue);
+        overflow: hidden;
+      }
+      .map-card iframe {
+        width: 100%;
+        height: 300px;
+        border: 0;
+        display: block;
+      }
+      .related-card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 12px;
+        box-shadow: var(--shadow-red);
+      }
+
+      /* ========== FOOD GUIDE (full-width below) - uses header color as background ========== */
+      .food-guide {
+        background: var(--blue);
+        color: #fff;
+        padding: 26px 12px;
+      }
+      .food-guide .content {
+        padding: 0;
+        max-width: var(--content-max);
+        margin: 0 auto;
+      }
+      .food-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 18px;
+        margin-top: 12px;
+      }
+      .food-card {
+        background: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        color: var(--text);
+        box-shadow: var(--shadow-yellow);
+      }
+      .food-card img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+      }
+      .food-card .body {
+        padding: 12px;
+      }
+      .food-card h3 {
+        margin: 0 0 6px 0;
+        font-family: Montserrat;
+        color: var(--text);
+      }
+      .food-card p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      /* ========== ACCESSIBILITY & SUITABILITY (full-width, colored background) ========== */
+      .accessibility {
+        background: var(--blue-light);
+        color: var(--text);
+        padding: 26px 12px;
+      }
+      .accessibility .content {
+        max-width: var(--content-max);
+        margin: 0 auto;
+        padding: 0;
+      }
+      .accessibility h2 {
+        font-family: Montserrat;
+        margin-top: 0;
+      }
+      .accessibility p {
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      /* ========== Footer ========== */
+      footer {
+        padding: 18px 12px;
+        text-align: center;
+        color: var(--muted);
+      }
+      footer a {
+        color: var(--blue);
+      }
+
+      /* ========== Responsive adjustments ========== */
+      @media (max-width: 1100px) {
+        .bottom-grid {
+          grid-template-columns: 1fr 360px;
+        }
+      }
+      @media (max-width: 860px) {
+        .bottom-grid {
+          grid-template-columns: 1fr;
+        }
+        .side-column {
+          order: 2;
+        }
+      }
+      @media (max-width: 520px) {
+        .hero .hero-media {
+          height: 320px;
+        }
+        .hero h1 {
+          font-size: 1.6rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <!-- HEADER (full width blue) -->
+    <header class="page-wide" role="banner">
+      <div class="nav">
+        <a href="index.html">Home</a>
+        <a href="cuba.html" aria-current="page">Cuba</a>
+        <a href="ecuador.html">Ecuador</a>
+      </div>
+    </header>
+
+    <!-- HERO (full-width image with centered overlay) -->
+    <section class="hero page-wide" aria-label="Hero">
+      <!-- full-bleed image -->
+      <img
+        class="hero-media"
+        src="Cuba/main-cuba.jpg"
+        alt="Colorful classic cars and pastel colonial buildings in Old Havana on a sunny day."
+        loading="lazy"
+      />
+      <div class="overlay">
+        <div class="content copy" role="region" aria-label="Hero text">
+          <h1>Cuba: Music, History, and Timeless Beaches</h1>
+          <p class="lead">
+            Cuba is a country of vivid history, captivating landscapes, and
+            deeply rooted cultural traditions. Located in the Caribbean Sea, it
+            is the largest island in the Caribbean, sitting just south of
+            Florida and east of Mexico. Known as the "Pearl of the Antilles,"
+            its diverse character includes lush tobacco valleys, pristine
+            Caribbean beaches, charming colonial cities, and a revolutionary
+            heritage that shaped an entire era, making it one of the most
+            remarkable and unforgettable destinations in Latin America.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN CONTENT (centered content area, but full-bleed sections above/below remain full width) -->
+    <main id="main">
+      <!-- REASONS (moved above quick facts) -->
+      <section class="reasons page-wide" aria-labelledby="reasons-head">
+        <div class="content">
+          <h2 id="reasons-head">Best reasons to visit Cuba</h2>
+          <p
+            class="lead"
+            style="color: var(--muted); margin-top: 6px; max-width: 70ch"
+          >
+            A quick look at what makes Cuba special — strong cultural scenes,
+            iconic landscapes, and unforgettable food & music.
+          </p>
+
+          <div class="reason-grid">
+            <article class="reason" aria-labelledby="r1">
+              <h3 id="r1">Music & living culture</h3>
+              <p>
+                Cuban music is everywhere — from son and salsa in Havana’s clubs
+                to street bands in small plazas. Expect live performances,
+                spontaneous dancing, and festivals that celebrate Afro-Cuban
+                rhythms and local musicians.
+              </p>
+            </article>
+
+            <article class="reason" aria-labelledby="r2">
+              <h3 id="r2">Historic architecture & charming towns</h3>
+              <p>
+                Old Havana, Trinidad, and Cienfuegos showcase colonial
+                architecture, cobbled streets, and colorful facades. These towns
+                offer museums, plazas, and walking routes that put Cuba’s
+                layered history on display.
+              </p>
+            </article>
+
+            <article class="reason" aria-labelledby="r3">
+              <h3 id="r3">Beaches, nature & outdoor adventure</h3>
+              <p>
+                From Varadero’s white sands to Viñales’ limestone mogotes, Cuba
+                offers snorkeling, diving, hiking, and scenic drives. Nature
+                lovers will appreciate the diversity of coastal and inland
+                landscapes.
+              </p>
+            </article>
+
+            <article class="reason" aria-labelledby="r4">
+              <h3 id="r4">Food & authentic dining</h3>
+              <p>
+                Paladares and street vendors serve ropa vieja, arroz con pollo,
+                and fresh plantain dishes. Eating in Cuba is a hands-on cultural
+                experience — seek out family-run spots for the most authentic
+                flavors.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- QUICK FACTS (centered, slightly smaller cards, removed visa & flight time; added capital, foundation year, population) -->
+      <section class="quick-facts page-wide" aria-labelledby="facts-head">
+        <div class="content">
+          <h2 id="facts-head">Quick facts</h2>
+
+          <div class="facts-grid" role="list" aria-label="Quick facts">
+            <div class="fact-card" role="listitem">
+              <h3>Currency</h3>
+              <p>Cuban Peso (CUP)</p>
+            </div>
+            <div class="fact-card" role="listitem">
+              <h3>Language</h3>
+              <p>Spanish</p>
+            </div>
+            <div class="fact-card" role="listitem">
+              <h3>Best months</h3>
+              <p>November – April</p>
+            </div>
+            <div class="fact-card" role="listitem">
+              <h3>Capital</h3>
+              <p>Havana</p>
+            </div>
+            <div class="fact-card" role="listitem">
+              <h3>Founded</h3>
+              <p>1519 (Spanish settlement)</p>
+            </div>
+            <div class="fact-card" role="listitem">
+              <h3>Population</h3>
+              <p>~11 million (estimate)</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ATTRACTIONS (background image very translucent; cards with extended text) -->
+      <section
+        id="attractions"
+        class="attractions-section page-wide"
+        aria-labelledby="attr-head"
+      >
+        <div class="content attractions">
+          <h2 id="attr-head">Top attractions & cities</h2>
+
+          <div class="attractions-grid" role="list">
+            <article class="attr-card" role="listitem" tabindex="0">
+              <img
+                src="Cuba/havana.jpg"
+                alt="Old Havana colorful colonial buildings and street life"
+                loading="lazy"
+              />
+              <div class="body">
+                <h3>Old Havana (Habana Vieja)</h3>
+                <p>
+                  Old Havana’s plazas, restored baroque and neoclassical
+                  buildings, and lively street performers create a layered and
+                  walkable historic core. Spend time in Plaza Vieja and Plaza de
+                  la Catedral; explore museums and local cafés and enjoy live
+                  music at night.
+                </p>
+              </div>
+            </article>
+
+            <article class="attr-card" role="listitem" tabindex="0">
+              <img
+                src="Cuba/varadero.jpg"
+                alt="White sand Varadero beach with turquoise water"
+                loading="lazy"
+              />
+              <div class="body">
+                <h3>Varadero Beach</h3>
+                <p>
+                  Varadero’s long white sands and calm waters are ideal for
+                  swimming, snorkeling, and family beach days. Resorts and
+                  day-trip options make it a convenient base for ocean
+                  activities and relaxed seaside time.
+                </p>
+              </div>
+            </article>
+
+            <article class="attr-card" role="listitem" tabindex="0">
+              <img
+                src="Cuba/vinales.jpg"
+                alt="Viñales valley tobacco fields and mogotes landscape"
+                loading="lazy"
+              />
+              <div class="body">
+                <h3>Viñales Valley</h3>
+                <p>
+                  Known for its dramatic mogotes (limestone hills) and tobacco
+                  farms, Viñales is a peaceful area for hiking, horseback
+                  riding, and guided farm visits. The valley is photogenic and
+                  offers insight into rural Cuban life and agriculture.
+                </p>
+              </div>
+            </article>
+
+            <article class="attr-card" role="listitem" tabindex="0">
+              <img
+                src="Cuba/guardalavaca.jpg"
+                alt="Guardalavaca beach with turquoise lagoon and palm trees"
+                loading="lazy"
+              />
+              <div class="body">
+                <h3>Guardalavaca Beach</h3>
+                <p>
+                  Guardalavaca’s calm, clear waters are great for snorkeling and
+                  relaxed beach days. The coastline offers small bays and hidden
+                  coves, with nearby rural towns that feel quieter than the
+                  busier resort stretches.
+                </p>
+              </div>
+            </article>
+
+            <article class="attr-card" role="listitem" tabindex="0">
+              <img
+                src="Cuba/trinidad.jpg"
+                alt="Trinidad colonial town colorful houses and cobbled streets"
+                loading="lazy"
+              />
+              <div class="body">
+                <h3>Trinidad</h3>
+                <p>
+                  Trinidad is a UNESCO World Heritage town with cobbled streets,
+                  colorful facades, and nearby natural attractions. Explore
+                  local museums, artisan markets, and the nearby beaches and
+                  waterfalls for a mix of culture and nature.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- BOTTOM GRID: Planning | Map + Related Articles (side-by-side) -->
+      <section class="bottom-grid page-wide" aria-labelledby="plan-head">
+        <div class="content planning" style="padding: 0">
+          <div
+            class="planning-card"
+            role="region"
+            aria-labelledby="plan-head-inner"
+          >
+            <h3
+              id="plan-head-inner"
+              style="margin-top: 0; font-family: Montserrat"
+            >
+              Planning: airports, transport & money
+            </h3>
+
+            <h4 style="margin-bottom: 8px; font-family: Montserrat">
+              Airports & Getting There
+            </h4>
+            <ul style="margin-top: 0; color: var(--muted)">
+              <li>
+                <strong>Havana (HAV)</strong> — main international gateway with
+                flights from North America and Europe.
+              </li>
+              <li>
+                <strong>Varadero (VRA)</strong> — convenient for beach resort
+                access.
+              </li>
+            </ul>
+
+            <h4 style="margin-top: 12px; font-family: Montserrat">
+              Local transport
+            </h4>
+            <ul style="margin-top: 6px; color: var(--muted)">
+              <li>
+                Shared taxis, buses, and private transfers. Car rentals are
+                limited—book early and verify local insurance rules.
+              </li>
+              <li>
+                Arrange official transfers from hotels for late arrivals where
+                possible.
+              </li>
+            </ul>
+
+            <h4 style="margin-top: 12px; font-family: Montserrat">
+              Money & costs
+            </h4>
+            <ul style="margin-top: 6px; color: var(--muted)">
+              <li>
+                Cash in local currency is commonly used. Typical costs: coffee
+                $1.5–3; midrange meal $8–20.
+              </li>
+              <li>
+                Use official exchange points and avoid unlicensed currency
+                exchanges.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <aside class="page-wide">
+          <div class="content side-column" style="padding: 0">
+            <div class="map-card" role="region" aria-labelledby="map-title">
+              <h4
+                id="map-title"
+                style="margin: 12px 12px 0 12px; font-family: Montserrat"
+              >
+                Interactive map
+              </h4>
+              <iframe
+                title="Map of Cuba with key destinations"
+                src="https://www.google.com/maps?q=Cuba&output=embed"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+              <div
+                style="
+                  padding: 10px 12px;
+                  color: var(--muted);
+                  font-size: 0.95rem;
+                "
+              >
+                Interactive map with suggested pins — click markers for details.
+              </div>
+            </div>
+
+            <div
+              class="related-card"
+              role="region"
+              aria-labelledby="related-title"
+            >
+              <h4
+                id="related-title"
+                style="margin: 0 0 8px 0; font-family: Montserrat"
+              >
+                Related articles & resources
+              </h4>
+              <div
+                class="related-links"
+                style="display: flex; flex-direction: column; gap: 8px"
+              >
+                <a href="https://visitcuba.com/" target="_blank" rel="noopener"
+                  >visitcuba.com</a
+                >
+                <a
+                  href="https://www.tripadvisor.com/Attractions-g147270-Activities-Cuba.html"
+                  target="_blank"
+                  rel="noopener"
+                  >Tripadvisor attractions in Cuba</a
+                >
+                <a
+                  href="https://www.cubatravel.cu/en"
+                  target="_blank"
+                  rel="noopener"
+                  >cubatravel.cu/en</a
+                >
+              </div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- FOOD GUIDE (full-width, uses header color as background) -->
+      <section class="food-guide page-wide" aria-labelledby="food-head">
+        <div class="content">
+          <h2
+            id="food-head"
+            style="color: #fff; margin-top: 0; font-family: Montserrat"
+          >
+            Cuban food guide — main dishes
+          </h2>
+
+          <div class="food-grid" role="list">
+            <article class="food-card" role="listitem" tabindex="0">
+              <img
+                src="Cuba/ropavieja.jpg"
+                alt="Ropa Vieja with rice and beans"
+                loading="lazy"
+              />
+              <div class="body">
+                <h3>Ropa Vieja</h3>
+                <p>
+                  Shredded beef stewed in a rich tomato and pepper sauce,
+                  usually served with rice and black beans. A cornerstone of
+                  Cuban homestyle cooking and a favorite for its tender texture
+                  and savory flavors.
+                </p>
+              </div>
+            </article>
+
+            <article class="food-card" role="listitem" tabindex="0">
+              <img
+                src="Cuba/congris.jpg"
+                alt="Congrí rice and beans"
+                loading="lazy"
+              />
+              <div class="body">
+                <h3>Congrí</h3>
+                <p>
+                  A hearty rice and black beans dish cooked together with
+                  sofrito, garlic, and pork. Congrí is a Cuban staple that pairs
+                  perfectly with grilled meats or as a comforting side.
+                </p>
+              </div>
+            </article>
+
+            <article class="food-card" role="listitem" tabindex="0">
+              <img
+                src="Cuba/caldosa.jpg"
+                alt="Caldosa seafood soup"
+                loading="lazy"
+              />
+              <div class="body">
+                <h3>Caldosa</h3>
+                <p>
+                  A comforting Cuban broth made with seafood, root vegetables,
+                  and a splash of lime. Caldosa is often served in a clay pot
+                  and is perfect for cooler evenings or as a flavorful starter.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACCESSIBILITY & SUITABILITY (full-width, colored background) -->
+      <section class="accessibility page-wide" aria-labelledby="access-head">
+        <div class="content">
+          <h2 id="access-head">Accessibility & suitability</h2>
+          <p>
+            Cuba can be a rewarding destination for many traveler types.
+            Families will find beach resorts and short day trips suitable for
+            children; couples and cultural travelers will enjoy museums, music,
+            and colonial towns; solo travelers will find friendly local scenes
+            and social nightlife, but should use normal urban safety precautions
+            (watch belongings, avoid poorly lit or isolated areas at night).
+            Infrastructure varies outside major tourist hubs — sidewalks and
+            ramps may be limited in smaller towns. For visitors with mobility
+            needs, contact hotels and tour operators in advance to confirm room
+            accessibility, ground transport suitability, and availability of
+            accessible tours. Medical facilities are available in major cities,
+            but specialized care may require travel to larger hospitals; ensure
+            appropriate travel insurance and medication planning before arrival.
+            For neurodiverse or sensory-sensitive travelers, busy markets and
+            festivals can be loud — plan quieter activities and check in with
+            local guides about less-crowded times to visit popular sites.
+          </p>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="page-wide" role="contentinfo">
+        <div class="content">
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 8px;
+            "
+          >
+            <div>
+              <strong style="font-family: Montserrat">Cuba Guide</strong>
+            </div>
+            <div style="color: var(--muted); text-align: center">
+              Sources: visitcuba.com ·
+              tripadvisor.com/Attractions-g147270-Activities-Cuba.html ·
+              cubatravel.cu/en
+            </div>
+          </div>
+
+          <div
+            style="
+              margin-top: 12px;
+              text-align: center;
+              color: var(--muted);
+              font-size: 0.92rem;
+            "
+          >
+            © 2026 — Prepared by Johan Cajas &amp; Wilhelm Gonce
+          </div>
+        </div>
+      </footer>
+    </main>
+  </body>
+</html>
