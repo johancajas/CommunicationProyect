@@ -1,0 +1,233 @@
+body {
+        font-family: Inter, sans-serif;
+        margin: 0;
+        background: #ffffff;
+        color: #222;
+        line-height: 1.5;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 10px;
+      }
+
+      /* HEADER */
+
+      header {
+        border-bottom: 1px solid #eee;
+      }
+
+      nav {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 15px;
+      }
+
+      nav a {
+        background: #1565c0;
+        color: white;
+        padding: 12px 26px;
+        border-radius: 8px;
+        font-family: Montserrat;
+        font-size: 18px;
+        text-decoration: none;
+      }
+
+      nav a:nth-child(2) {
+        background: #c62828;
+      }
+      nav a:nth-child(3) {
+        background: linear-gradient(90deg, #1565c0, #c62828);
+      }
+
+      /* HERO */
+
+      .hero img {
+        width: 100%;
+        height: 30em;
+        object-fit: cover;
+        object-position: center top;
+        border-radius: 10px;
+      }
+
+      .hero h1 {
+        font-family: Montserrat;
+        margin-top: 15px;
+        font-size: 32px;
+      }
+
+      .hero p {
+        color: #555;
+        max-width: 700px;
+      }
+
+      /* REASONS */
+
+      .reasons {
+        margin-top: 40px;
+      }
+
+      .reasons h2 {
+        font-family: Montserrat;
+      }
+
+      .reason-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+
+      .reason {
+        background: #fff;
+        border-left: 6px solid #f4c542;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 6px 16px rgba(198, 40, 40, 0.1);
+      }
+
+      .reason h3 {
+        font-family: Montserrat;
+        margin-top: 0;
+      }
+
+      .quick-facts {
+        text-align: center;
+        margin: 50px 0;
+      }
+
+      .quick-facts h2 {
+        font-family: Montserrat;
+      }
+
+      .facts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 20px;
+        max-width: 900px;
+        margin: auto;
+      }
+
+      .fact-card {
+        background: #eef4ff;
+        border-radius: 10px;
+        padding: 25px;
+        box-shadow: 0 6px 18px rgba(21, 101, 192, 0.15);
+        transition: all 0.25s;
+      }
+
+      .fact-card:hover {
+        transform: translateY(-5px);
+        background: #e2ecff;
+        box-shadow: 0 12px 24px rgba(198, 40, 40, 0.15);
+      }
+
+      .fact-card h3 {
+        margin-bottom: 6px;
+        font-family: Montserrat;
+      }
+
+      .attractions {
+        margin-top: 40px;
+      }
+
+      .attractions-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+
+      .card {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(21, 101, 192, 0.08);
+        overflow: hidden;
+      }
+
+      .card img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+      }
+
+      .card-body {
+        padding: 15px;
+      }
+
+      .card h3 {
+        font-family: Montserrat;
+        margin-top: 0;
+      }
+
+
+      .bottom-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin-top: 50px;
+      }
+
+      .planning ul {
+        padding-left: 18px;
+      }
+
+      .map iframe {
+        width: 100%;
+        height: 300px;
+        border: none;
+        border-radius: 10px;
+      }
+
+      .related {
+        margin-top: 20px;
+      }
+
+      .related a {
+        display: block;
+        color: #1565c0;
+        margin: 6px 0;
+      }
+
+      .food-guide {
+        margin-top: 60px;
+      }
+
+      .food-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+      }
+
+      .food {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 6px 18px rgba(244, 197, 66, 0.15);
+        overflow: hidden;
+      }
+
+      .food img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+      }
+
+      .food div {
+        padding: 12px;
+      }
+
+      .accessibility {
+        margin-top: 50px;
+        background: #f9fbff;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 6px 16px rgba(21, 101, 192, 0.08);
+      }
+
+      footer {
+        border-top: 1px solid #eee;
+        margin-top: 60px;
+        padding: 20px;
+        text-align: center;
+        color: #777;
+      }
